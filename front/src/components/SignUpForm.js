@@ -7,23 +7,24 @@ const LogInForm = ({ logInOn, setLogInOn, setSignUpOn}) => {
     const [data, setData] = useState({
         username: '',
         password: '',
-        confirmedPassword: ''
+        confirmedPassword: '',
+        email: ''
     })
 
     const onsSubmit = () => {
-        AuthService.register({email: '', name: data.username, password: data.password}).then(
+        AuthService.register({email: data.email, name: data.username, password: data.password}).then(
             response => {
                 console.log(data);
                 setData({
                     username: '',
                     password: '',
-                    confirmedPassword: ''
+                    confirmedPassword: '',
+                    email: ''
                 });
                 if(logInOn) setLogInOn(false);
                 else setSignUpOn(false);
             }
         ).catch(error => console.log(error));
-
     }
 
     return (
@@ -49,17 +50,28 @@ const LogInForm = ({ logInOn, setLogInOn, setSignUpOn}) => {
                 <Form.Group className="mb-3">
                     <Form.Label className="font-weight-bolder">Confirm Password</Form.Label>
                     <Form.Control
-                        type="password"
+                        className={data.password !== data.confirmedPassword ? 'border-3 border-danger' : ''}
+                        type="confirmedPassword"
                         placeholder=""
                         onChange={(event) => setData({...data, confirmedPassword: event.nativeEvent.data})}
+                    />
+                    {data.password !== data.confirmedPassword ? <h6 className="text-danger">*Passwords do not match. Please try again.</h6> :<></>}
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label className="font-weight-bolder">Email</Form.Label>
+                    <Form.Control
+                        type="email"
+                        placeholder=""
+                        onChange={(event) => setData({...data, email: event.nativeEvent.data})}
                     />
                 </Form.Group>
 
             </div>
             <Button
                 onClick={() => onsSubmit()}
-                disabled={!(data.username !== '' && data.password !== '' && data.confirmedPassword !== '' && data.password === data.confirmedPassword)}
-                variant={(data.username !== '' && data.password !== '' && data.confirmedPassword !== '' && data.password === data.confirmedPassword) ? 'primary' : 'secondary'}
+                disabled={!(data.username !== '' && data.password !== '' && data.confirmedPassword !== '' && data.email !== '' && data.password === data.confirmedPassword)}
+                variant={(data.username !== '' && data.password !== '' && data.confirmedPassword !== '' && data.email !== '' && data.password === data.confirmedPassword) ? 'primary' : 'secondary'}
             >
                 Log In
             </Button>

@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Navbar, Nav, NavDropdown, Button} from "react-bootstrap";
 import twitch from "../assets/twitch.png";
-const Header = ({ setLogInOn, auth}) => {
+const Header = ({ setLogInOn, setSignUpOn, auth}) => {
     return (
         <>
             <Navbar bg="light" variant="light" className="border-bottom border-3 border-dark p-1">
@@ -31,8 +31,8 @@ const Header = ({ setLogInOn, auth}) => {
                                             Log In
                                         </Button>
                                     </Nav.Link>
-                                    <Nav.Link href="#link">
-                                        <Button variant="primary" onClick={() => setLogInOn(true)}>
+                                    <Nav.Link href="">
+                                        <Button variant="primary" onClick={() => setSignUpOn(true)}>
                                             Sign In
                                         </Button>
                                     </Nav.Link>

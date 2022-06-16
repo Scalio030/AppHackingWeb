@@ -3,10 +3,10 @@ import { Buffer } from 'buffer';
 
 
 const register = (data) => {
-    return http.post('/guest/register', data);
+    return http.post('users', data);
 };
 
-const login = () => {
+const login = (data) => {
     const parseJwt = () => {
         const currentUser = JSON.parse(localStorage.getItem('user'));
         const token = currentUser.token;
@@ -16,7 +16,7 @@ const login = () => {
             return false;
         }
     };
-    const encodedString = Buffer.from(email + ':' + password).toString('base64');
+    const encodedString = Buffer.from(data.email + ':' + data.password).toString('base64');
     const authvalue = 'Basic ' + encodedString;
 
     return http
