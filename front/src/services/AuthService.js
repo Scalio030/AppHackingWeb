@@ -2,15 +2,11 @@ import http from './http-common';
 import { Buffer } from 'buffer';
 
 
-const register = (name, email, password) => {
-    return http.post('/guest/register', {
-        name,
-        email,
-        password,
-    });
+const register = (data) => {
+    return http.post('/guest/register', data);
 };
 
-const login = (email, password) => {
+const login = () => {
     const parseJwt = () => {
         const currentUser = JSON.parse(localStorage.getItem('user'));
         const token = currentUser.token;
@@ -54,15 +50,10 @@ const login = (email, password) => {
         });
 };
 
-const logout = () => {
+const logout = (id) => {
     localStorage.removeItem('user');
     delete http.defaults.headers['Authorization'];
-    return http.put('/auth/logout', {
-        firstname,
-        lastname,
-        email,
-        password
-    });
+    return http.put('/auth/logout'+id);
 };
 
 const getCurrentUser = () => {

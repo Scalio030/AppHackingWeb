@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Form} from "react-bootstrap";
+import AuthService from "../services/AuthService";
 
 const LogInForm = ({ logInOn, setLogInOn, setSignUpOn}) => {
 
@@ -10,14 +11,19 @@ const LogInForm = ({ logInOn, setLogInOn, setSignUpOn}) => {
     })
 
     const onsSubmit = () => {
-        console.log(data);
-        setData({
-            username: '',
-            password: '',
-            confirmedPassword: ''
-        });
-        if(logInOn) setLogInOn(false);
-        else setSignUpOn(false);
+        AuthService.register({email: '', name: data.username, password: data.password}).then(
+            response => {
+                console.log(data);
+                setData({
+                    username: '',
+                    password: '',
+                    confirmedPassword: ''
+                });
+                if(logInOn) setLogInOn(false);
+                else setSignUpOn(false);
+            }
+        ).catch(error => console.log(error));
+
     }
 
     return (
@@ -52,8 +58,8 @@ const LogInForm = ({ logInOn, setLogInOn, setSignUpOn}) => {
             </div>
             <Button
                 onClick={() => onsSubmit()}
-                disabled={!(data.username !== '' && data.password !== '' && data.confirmedPassword !== '')}
-                variant={(data.username !== '' && data.password !== '' && data.confirmedPassword !== '') ? 'primary' : 'secondary'}
+                disabled={!(data.username !== '' && data.password !== '' && data.confirmedPassword !== '' && data.password === data.confirmedPassword)}
+                variant={(data.username !== '' && data.password !== '' && data.confirmedPassword !== '' && data.password === data.confirmedPassword) ? 'primary' : 'secondary'}
             >
                 Log In
             </Button>

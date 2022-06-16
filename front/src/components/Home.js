@@ -14,7 +14,7 @@ const Home = () => {
         <>
             <Header setLogInOn={setLogInOn} auth={auth} />
             <div className="m-2">
-                <h6>{auth ? 'You are not connected !' : 'You are connected !'}</h6>
+                <h6>{auth ? 'You are connected !' : 'You are not connected !'}</h6>
             </div>
 
             <ModalTwitch
