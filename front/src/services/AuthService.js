@@ -1,6 +1,6 @@
 import http from './http-common';
 import { Buffer } from 'buffer';
-import { parseJwt } from '../components/app/_utils/methods';
+
 
 const register = (firstname, lastname, email, password) => {
     return http.post('/users', {
@@ -12,6 +12,15 @@ const register = (firstname, lastname, email, password) => {
 };
 
 const login = (email, password) => {
+    const parseJwt = () => {
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        const token = currentUser.token;
+        try {
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) {
+            return false;
+        }
+    };
     const encodedString = Buffer.from(email + ':' + password).toString('base64');
     const authvalue = 'Basic ' + encodedString;
 
