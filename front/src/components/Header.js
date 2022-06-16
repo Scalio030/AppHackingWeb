@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Navbar, Nav, NavDropdown, Button} from "react-bootstrap";
 import twitch from "../assets/twitch.png";
-const Header = ({ setLogInOn}) => {
+const Header = ({ setLogInOn, auth}) => {
     return (
         <>
             <Navbar bg="light" variant="light" className="border-bottom border-3 border-dark p-1">
@@ -18,15 +18,26 @@ const Header = ({ setLogInOn}) => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <Nav.Link href=""><Button variant="secondary" onClick={() => setLogInOn(true)}>Se connecter</Button></Nav.Link>
-                            <Nav.Link href="#link"><Button variant="primary">S'inscrire</Button></Nav.Link>
-                            <NavDropdown title="y" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Beginner package</NavDropdown.Item>
-                                <NavDropdown.Divider className="m-0" />
-                                <NavDropdown.Item href="#action/3.2">Roles</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Wave management</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.4">Weak & strong sides</NavDropdown.Item>
-                            </NavDropdown>
+                            { auth ?
+                                <Nav.Link href="">
+                                    <Button variant="primary" onClick={() => console.log('deco')}>
+                                        Deconnect
+                                    </Button>
+                                </Nav.Link>
+                                :
+                                <>
+                                    <Nav.Link href="">
+                                        <Button variant="secondary" onClick={() => setLogInOn(true)}>
+                                            Log In
+                                        </Button>
+                                    </Nav.Link>
+                                    <Nav.Link href="#link">
+                                        <Button variant="primary" onClick={() => setLogInOn(true)}>
+                                            Sign In
+                                        </Button>
+                                    </Nav.Link>
+                                </>
+                            }
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
