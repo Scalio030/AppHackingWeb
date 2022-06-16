@@ -53,6 +53,6 @@ class RegisteredUserController extends Controller
         header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Authorization, Origin');
         header('Access-Control-Allow-Methods:  POST, PUT');
 
-        return redirect(RouteServiceProvider::HOME);
+        return response()->json($user, 201);
     }
 }
