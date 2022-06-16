@@ -1,7 +1,15 @@
 import React from "react";
 import {Container, Navbar, Nav, NavDropdown, Button} from "react-bootstrap";
 import twitch from "../assets/twitch.png";
+import AuthService from "../services/AuthService";
+
 const Header = ({ setLogInOn, setSignUpOn, auth}) => {
+
+    const onDeconnect = (id) => {
+        AuthService.logout(id).then(
+        ).catch(error => console.log(error));
+    }
+
     return (
         <>
             <Navbar bg="light" variant="light" className="border-bottom border-3 border-dark p-1">
@@ -20,7 +28,7 @@ const Header = ({ setLogInOn, setSignUpOn, auth}) => {
                         <Nav className="ms-auto">
                             { auth ?
                                 <Nav.Link href="">
-                                    <Button variant="primary" onClick={() => console.log('deco')}>
+                                    <Button variant="primary" onClick={() => onDeconnect()}>
                                         Deconnect
                                     </Button>
                                 </Nav.Link>
