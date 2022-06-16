@@ -2,12 +2,11 @@ import http from './http-common';
 import { Buffer } from 'buffer';
 
 
-const register = (firstname, lastname, email, password) => {
-    return http.post('/users', {
-        firstname,
-        lastname,
+const register = (name, email, password) => {
+    return http.post('/guest/register', {
+        name,
         email,
-        password
+        password,
     });
 };
 
@@ -25,8 +24,8 @@ const login = (email, password) => {
     const authvalue = 'Basic ' + encodedString;
 
     return http
-        .post(
-            'users/login',
+        .put(
+            'guest/login',
             {},
             {
                 headers: {
@@ -56,11 +55,14 @@ const login = (email, password) => {
 };
 
 const logout = () => {
-    console.log(http.defaults.params);
-    delete http.defaults.params.data;
-    console.log(http.defaults.params);
     localStorage.removeItem('user');
     delete http.defaults.headers['Authorization'];
+    return http.put('/auth/logout', {
+        firstname,
+        lastname,
+        email,
+        password
+    });
 };
 
 const getCurrentUser = () => {
