@@ -12,7 +12,7 @@ const Home = () => {
 
     return (
         <>
-            <Header setLogInOn={setLogInOn} auth={auth} />
+            <Header setLogInOn={setLogInOn} setSignUpOn={setSignUpOn} auth={auth} />
             <div className="m-2">
                 <h6>{auth ? 'You are connected !' : 'You are not connected !'}</h6>
             </div>
