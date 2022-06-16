@@ -1,0 +1,14 @@
+
+@import '~bootstrap/scss/_functions';
+@import 'tabs';
+
+// change the theme
+$theme-colors: (
+        "primary": rgb(145,70,255),
+        "secondary":  rgb(240,240,255),
+        "black":  rgb(0,0,0)
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+

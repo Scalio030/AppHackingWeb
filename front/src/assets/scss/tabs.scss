@@ -1,0 +1,36 @@
+.nav-tabs {
+  border-bottom: 2px solid rgb(240,240,255)!important;
+
+  .nav-link {
+    //margin-bottom: -$nav-tabs-border-width;
+    color: rgb(0,0,0);
+    font-weight: bold;
+    //font-size: $font-size-sm;
+    //@include border-top-radius($nav-tabs-border-radius);
+    border: none!important;
+
+    &:hover,
+    &:focus {
+      color: rgb(0,0,0);
+    }
+
+    &.disabled {
+      color: rgb(240,240,255);
+    }
+  }
+
+  .nav-item{
+    border: none!important;
+
+    .nav-link.active{
+      //font-family:$font-family-base;
+      color:  rgb(145,70,255);
+    }
+  }
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: rgb(145,70,255);
+    background-color: transparent;
+    border-bottom: 2px solid rgb(145,70,255)!important;
+  }
+}
